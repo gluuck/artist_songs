@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @download %>
+
+<div>
+  <%= link_to "Edit this download", edit_download_path(@download) %> |
+  <%= link_to "Back to downloads", downloads_path %>
+
+  <%= button_to "Destroy this download", @download, method: :delete %>
+</div>
