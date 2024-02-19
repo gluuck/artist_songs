@@ -4,10 +4,11 @@ class Artist < ApplicationRecord
   has_many :songs, -> { order(:title) }, dependent: :destroy
   has_many :downloads, dependent: :destroy
 
-  scope :download_artists, -> { joins(:downloads).where.not(downloads: nil).distinct.map(&:downloads).flatten.map(&:artist_id).group_by(&:itself).transform_values(&:size).values }
-  scope :top, -> (letter, count) { where('name LIKE ?', "#{letter}%") if download_artists.map{|x| x >= count} }
+  scope :top, -> (letter, count) { where('name LIKE ?', "#{letter}%").order(:name).limit(count) }
+  
+  validates :name, presence: true
 
   def songs_top    
-    Song.find(downloads_songs.map{|i| i[-1]}.sort.reverse.map{|s| downloads_songs.key(s)})
+    Song.find_each(downloads_songs.map{|i| i[-1]}.sort.reverse.map{|s| downloads_songs.key(s)})
   end
 end

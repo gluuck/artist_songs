@@ -27,7 +27,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_16_073635) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_downloads_on_artist_id"
-    t.index ["created_at"], name: "index_downloads_on_created_at"
     t.index ["song_id"], name: "index_downloads_on_song_id"
   end
 
@@ -38,7 +37,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_16_073635) do
     t.float "filesize", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "downloads_count", default: 0, null: false
     t.index ["artist_id"], name: "index_songs_on_artist_id"
+    t.index ["created_at"], name: "index_songs_on_created_at"
+    t.index ["downloads_count"], name: "index_songs_on_downloads_count"
     t.index ["title"], name: "index_songs_on_title"
   end
 
