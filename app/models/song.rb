@@ -3,9 +3,12 @@ class Song < ApplicationRecord
 
   has_many :downloads, dependent: :destroy
   
-  scope :top, -> (days, count){ where("created_at >= ?", days.days.ago)
-                                .group(:id).order("SUM(downloads_count) DESC")
-                                .limit(count) }
+  scope :top, -> (days, count){ joins(:downloads)
+                               .select('songs.id, songs.title as title, count(downloads.id) as downloads_count ')
+                               .group('songs.id')
+                               .having('songs.created_at >= ?', days.days.ago)  
+                               .order('downloads_count desc')                              
+                               .limit(count) }
 
   validates :title, :artist_id, presence: true
 end
