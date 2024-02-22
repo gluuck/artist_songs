@@ -14,7 +14,7 @@ class Artist < ApplicationRecord
   
   def songs_top
     songs.joins(:downloads)
-         .select('songs.id, count(downloads.id) as downloads_count')
+         .select('songs.id, songs.title as title, count(downloads.id) as downloads_count')
          .group('songs.id')
          .reorder('downloads_count desc')
   end
