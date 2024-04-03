@@ -38,7 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_03_122218) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "downloads_count", default: 0, null: false
-    t.index ["artist_id", "downloads_count"], name: "index_songs_on_artist_id_and_downloads_count"
+    t.index ["artist_id", "downloads_count"], name: "index_songs_on_artist_id_and_downloads_count", unique: true
     t.index ["artist_id"], name: "index_songs_on_artist_id"
     t.index ["created_at"], name: "index_songs_on_created_at"
     t.index ["downloads_count"], name: "index_songs_on_downloads_count"
