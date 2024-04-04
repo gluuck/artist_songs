@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_03_122218) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_04_105555) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,7 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_03_122218) do
     t.index ["artist_id", "downloads_count"], name: "index_songs_on_artist_id_and_downloads_count", unique: true
     t.index ["artist_id"], name: "index_songs_on_artist_id"
     t.index ["created_at"], name: "index_songs_on_created_at"
-    t.index ["downloads_count"], name: "index_songs_on_downloads_count"
     t.index ["title"], name: "index_songs_on_title"
   end
 

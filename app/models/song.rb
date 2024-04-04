@@ -5,9 +5,9 @@ class Song < ApplicationRecord
   
   scope :top, -> (days, count){ 
                                 joins(:downloads)
-                                .select('songs.*, count(downloads.id) as downloads_count ')
+                                .select('distinct songs.*, count(downloads.id) as downloads_count')
                                 .group('songs.id')
-                                .having('songs.created_at >= ?', days.days.ago)  
+                                .having('songs.created_at >= ?', (days - 1).days.ago)  
                                 .order(downloads_count: :desc)                              
                                 .limit(count) 
                               }
